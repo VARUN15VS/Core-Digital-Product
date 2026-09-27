@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Your First Salary — A Practical Guide for Young Professionals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0f2b46;
+    --navy-deep:#0a1d31;
+    --gold:#e8a73d;
+    --gold-soft:#f6d68f;
+    --forest:#1f6e4b;
+    --forest-soft:#e5f2ea;
+    --cream:#fbf7ee;
+    --paper:#ffffff;
+    --ink:#1a2733;
+    --ink-soft:#5a6a78;
+    --line:#e4ddcd;
+    --radius-s:6px;
+    --radius-m:14px;
+    box-sizing:border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){ }
+  }
+  *,*::before,*::after{box-sizing:inherit;}
+  html{scroll-behavior:smooth; scroll-padding-top: env(safe-area-inset-top, 0px);}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img,svg{max-width:100%;display:block;}
+  h1,h2,h3{font-family:'Fraunces',serif; margin:0; color:var(--navy);}
+  p{margin:0;}
+  a{text-decoration:none;color:inherit;}
+  .wrap{max-width:1120px; margin:0 auto; padding-left:24px; padding-right:24px;}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(251,247,238,0.9);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  .nav-inner{
+    max-width:1120px;margin:0 auto;padding:16px 24px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .brand{font-family:'Fraunces',serif;font-weight:600;font-size:1.15rem;color:var(--navy);letter-spacing:0.2px;}
+  .brand span{color:var(--gold);}
+  .nav-cta{
+    background:var(--navy); color:var(--cream); padding:10px 20px;
+    border-radius:999px; font-weight:600; font-size:0.9rem;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .nav-cta:hover{background:var(--navy-deep); transform:translateY(-1px);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:
+      radial-gradient(1200px 500px at 85% -10%, rgba(232,167,61,0.35), transparent 60%),
+      linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 55%, #14355a 100%);
+    color:var(--cream);
+    padding:64px 0 90px;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+    background-size:42px 42px;
+    mask-image:linear-gradient(180deg, black, transparent 75%);
+    pointer-events:none;
+  }
+  .hero-grid{
+    position:relative; z-index:1;
+    display:grid; grid-template-columns:0.85fr 1.15fr; gap:56px; align-items:center;
+  }
+  .kicker{
+    display:inline-block; background:var(--gold); color:var(--navy-deep);
+    font-weight:700; font-size:0.8rem; padding:7px 16px; border-radius:999px;
+    transform:rotate(-1.5deg);
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 5.2vw, 4.1rem);
+    line-height:0.98; font-weight:700; margin-top:18px;
+    color:var(--cream);
+  }
+  .hero h1 em{
+    font-style:normal; color:var(--gold-soft);
+    background:linear-gradient(180deg, transparent 62%, rgba(232,167,61,0.28) 62%);
+  }
+  .hero-sub{
+    margin-top:20px; max-width:46ch; font-size:1.08rem; line-height:1.6;
+    color:rgba(251,247,238,0.82);
+  }
+  .hero-actions{margin-top:30px; display:flex; gap:14px; flex-wrap:wrap; align-items:center;}
+  .btn-primary{
+    background:var(--gold); color:var(--navy-deep); font-weight:700;
+    padding:15px 28px; border-radius:10px; font-size:1rem;
+    box-shadow:0 10px 24px -8px rgba(232,167,61,0.6);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 14px 30px -8px rgba(232,167,61,0.7);}
+  .price-note{font-size:0.88rem; color:rgba(251,247,238,0.7);}
+  .price-note strong{color:var(--gold-soft);}
+
+  .pillars{
+    margin-top:40px; display:grid; grid-template-columns:repeat(5,1fr); gap:14px;
+  }
+  .pillar{text-align:left;}
+  .pillar-icon{
+    width:42px; height:42px; border-radius:11px;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(251,247,238,0.09); border:1px solid rgba(251,247,238,0.16);
+    margin-bottom:10px;
+  }
+  .pillar-icon svg{width:20px;height:20px;stroke:var(--gold-soft);}
+  .pillar h4{font-size:0.86rem; font-weight:700; color:var(--cream); margin:0 0 3px;}
+  .pillar p{font-size:0.78rem; color:rgba(251,247,238,0.62); line-height:1.35;}
+
+  /* Book mock */
+  .book-stage{position:relative; display:flex; justify-content:center; align-items:flex-end; min-height:440px;}
+  .book{
+    position:relative; width:240px; z-index:3;
+    transform:rotate(-4deg);
+    filter:drop-shadow(0 30px 40px rgba(0,0,0,0.45));
+  }
+  .book-face{
+    background:linear-gradient(160deg,#ffffff 0%, #f3efe4 100%);
+    border-radius:4px 10px 10px 4px;
+    padding:26px 20px 30px;
+    position:relative;
+    border-left:8px solid #0a1d31;
+  }
+  .book-eyebrow{font-size:0.62rem; letter-spacing:0.02em; color:var(--ink-soft); font-weight:600;}
+  .book-title1{font-family:'Fraunces',serif; font-weight:600; font-size:1.55rem; color:var(--navy); margin-top:10px; line-height:1;}
+  .book-title2{font-family:'Fraunces',serif; font-weight:700; font-size:2.55rem; color:var(--forest); line-height:0.95; margin-top:2px;}
+  .book-desc{font-size:0.68rem; color:var(--ink-soft); margin-top:12px; line-height:1.4;}
+  .book-badge{
+    position:absolute; top:16px; right:14px; width:56px; height:56px;
+    background:var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center;
+    text-align:center; font-size:0.52rem; font-weight:700; color:var(--navy-deep); line-height:1.1;
+    transform:rotate(8deg);
+    box-shadow:0 6px 14px rgba(0,0,0,0.25);
+  }
+  .book-list{margin-top:16px; display:flex; flex-direction:column; gap:7px;}
+  .book-list-item{display:flex; align-items:center; gap:8px; font-size:0.66rem; font-weight:600; color:var(--navy);}
+  .book-list-item .dot{width:16px; height:16px; border-radius:5px; display:flex; align-items:center; justify-content:center; flex:none;}
+  .book-list-item svg{width:9px;height:9px;}
+  .book-author{margin-top:20px; font-size:0.68rem; letter-spacing:0.06em; color:var(--ink-soft); font-weight:600;}
+
+  .stack{position:absolute; left:6%; bottom:6px; z-index:2; display:flex; flex-direction:column-reverse; gap:3px;}
+  .stack div{
+    width:118px; height:15px; border-radius:2px;
+    font-size:0.5rem; color:rgba(255,255,255,0.85); font-weight:700;
+    display:flex; align-items:center; padding-left:10px;
+    box-shadow:0 2px 4px rgba(0,0,0,0.2);
+  }
+
+  /* ---------- STRIP ---------- */
+  .strip{
+    background:var(--navy-deep); color:var(--cream);
+    margin-top:-46px; position:relative; z-index:5;
+    border-radius:16px; max-width:1072px; margin-left:auto; margin-right:auto;
+    padding:26px 20px;
+    display:grid; grid-template-columns:repeat(4,1fr);
+    box-shadow:0 20px 44px -20px rgba(10,29,49,0.55);
+  }
+  .strip-item{display:flex; align-items:center; gap:12px; padding:6px 12px; border-left:1px solid rgba(251,247,238,0.14);}
+  .strip-item:first-child{border-left:none;}
+  .strip-item svg{width:22px;height:22px; stroke:var(--gold-soft); flex:none;}
+  .strip-item span{font-size:0.86rem; font-weight:600; line-height:1.3;}
+
+  /* ---------- LEARN SECTION ---------- */
+  .learn{padding:110px 0 90px;}
+  .section-head{max-width:560px;}
+  .section-label{font-size:0.85rem; font-weight:700; color:var(--forest); letter-spacing:0.02em;}
+  .section-head h2{font-size:clamp(2rem,3.6vw,2.7rem); margin-top:10px; line-height:1.08;}
+  .rule{width:64px; height:4px; background:var(--gold); border-radius:2px; margin-top:18px;}
+
+  .learn-grid{margin-top:52px; display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;}
+  .learn-list{display:flex; flex-direction:column; gap:16px;}
+  .learn-item{display:flex; gap:14px; align-items:flex-start;}
+  .check{
+    width:24px; height:24px; border-radius:50%; background:var(--forest-soft); flex:none;
+    display:flex; align-items:center; justify-content:center; margin-top:1px;
+  }
+  .check svg{width:12px;height:12px; stroke:var(--forest);}
+  .learn-item p{font-size:1.02rem; line-height:1.5; color:var(--ink);}
+
+  .cards{position:relative; height:420px;}
+  .card{
+    position:absolute; width:230px; background:var(--paper); border-radius:12px;
+    box-shadow:0 22px 40px -16px rgba(15,43,70,0.28); padding:18px; border:1px solid var(--line);
+  }
+  .card1{top:0; left:0; transform:rotate(-6deg); z-index:1;}
+  .card2{top:36px; left:120px; transform:rotate(2deg); z-index:2;}
+  .card3{top:78px; left:236px; transform:rotate(9deg); z-index:1;}
+  .card-title{font-size:0.72rem; font-weight:700; color:var(--navy); margin-bottom:12px;}
+  .pyramid{display:flex; flex-direction:column; gap:3px;}
+  .pyramid div{height:20px; border-radius:3px; display:flex; align-items:center; padding-left:8px; font-size:0.52rem; color:#fff; font-weight:700;}
+  .donut-wrap{display:flex; align-items:center; gap:12px;}
+  .donut{
+    width:96px;height:96px;border-radius:50%; flex:none;
+    background:conic-gradient(var(--forest) 0 50%, var(--gold) 50% 80%, var(--navy) 80% 100%);
+    position:relative;
+  }
+  .donut::after{content:""; position:absolute; inset:18px; background:var(--paper); border-radius:50%;}
+  .donut-legend{font-size:0.6rem; display:flex; flex-direction:column; gap:6px; color:var(--ink-soft); font-weight:600;}
+  .donut-legend span{display:flex; align-items:center; gap:6px;}
+  .swatch{width:8px;height:8px;border-radius:2px;display:inline-block;}
+  .plan-steps{display:flex; flex-direction:column; gap:10px;}
+  .plan-step{display:flex; gap:8px; align-items:flex-start; font-size:0.6rem;}
+  .plan-dot{width:16px;height:16px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;}
+  .plan-dot svg{width:8px;height:8px;stroke:#fff;}
+  .plan-step strong{display:block; color:var(--navy); font-size:0.64rem;}
+  .plan-step span{color:var(--ink-soft);}
+  .caption{
+    position:absolute; bottom:-6px; left:8px; font-family:'Fraunces',serif; font-style:italic;
+    font-size:0.98rem; color:var(--navy); max-width:230px; line-height:1.35; z-index:3;
+  }
+
+  /* ---------- TRUST STRIP ---------- */
+  .trust{background:var(--paper); border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:38px 0;}
+  .trust-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:24px;}
+  .trust-item{display:flex; gap:12px; align-items:flex-start;}
+  .trust-item .pillar-icon{background:var(--forest-soft); border:none;}
+  .trust-item .pillar-icon svg{stroke:var(--forest);}
+  .trust-item h4{font-size:0.92rem; color:var(--navy); font-weight:700; margin:0 0 3px;}
+  .trust-item p{font-size:0.82rem; color:var(--ink-soft); line-height:1.4;}
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testi{background:var(--navy-deep); color:var(--cream); padding:90px 0;}
+  .testi-top{display:grid; grid-template-columns:0.9fr 1.6fr; gap:50px; align-items:end;}
+  .testi-top h2{color:var(--cream); font-size:clamp(1.9rem,3.2vw,2.4rem); line-height:1.1;}
+  .testi-top p{color:rgba(251,247,238,0.68); font-size:1rem; line-height:1.55; margin-top:14px; max-width:44ch;}
+  .testi-grid{margin-top:48px; display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  .testi-card{
+    background:rgba(251,247,238,0.05); border:1px solid rgba(251,247,238,0.12);
+    border-radius:14px; padding:26px;
+  }
+  .quote-mark{font-family:'Fraunces',serif; font-size:2.4rem; color:var(--gold); line-height:1; margin-bottom:6px;}
+  .testi-card p.quote{font-size:0.96rem; line-height:1.55; color:rgba(251,247,238,0.9);}
+  .stars{margin-top:16px; color:var(--gold); font-size:0.9rem; letter-spacing:2px;}
+  .testi-name{margin-top:10px; font-size:0.82rem; color:rgba(251,247,238,0.6); font-weight:600;}
+
+  /* ---------- PRICING ---------- */
+  .pricing{padding:100px 0 110px;}
+  .price-card{
+    background:linear-gradient(135deg, #ffffff 0%, #fbf3df 100%);
+    border:1px solid var(--line); border-radius:22px;
+    padding:52px 48px; display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center;
+    position:relative; overflow:hidden;
+  }
+  .price-card::before{
+    content:""; position:absolute; top:-70px; right:-70px; width:220px; height:220px;
+    background:var(--gold); opacity:0.18; border-radius:50%;
+  }
+  .price-badge{
+    display:inline-flex; align-items:center; gap:8px; background:#fce8e6; color:#c0392b;
+    padding:8px 16px; border-radius:999px; font-weight:700; font-size:0.8rem;
+  }
+  .price-badge svg{width:15px;height:15px; stroke:#c0392b;}
+  .price-card h2{margin-top:18px; font-size:clamp(1.7rem,3vw,2.1rem); line-height:1.15;}
+  .price-card > div:first-child > p{margin-top:12px; color:var(--ink-soft); font-size:0.98rem; max-width:40ch; line-height:1.5;}
+  .guarantee-row{margin-top:24px; display:flex; gap:22px; flex-wrap:wrap;}
+  .guarantee-row div{display:flex; align-items:center; gap:8px; font-size:0.82rem; color:var(--ink-soft); font-weight:600;}
+  .guarantee-row svg{width:16px;height:16px; stroke:var(--forest);}
+
+  .price-box{
+    background:var(--navy); border-radius:16px; padding:32px 30px; text-align:center;
+    position:relative; z-index:1;
+  }
+  .old-price{color:rgba(251,247,238,0.5); text-decoration:line-through; font-size:1.15rem;}
+  .new-price{color:var(--cream); font-family:'Fraunces',serif; font-weight:700; font-size:3.4rem; line-height:1; margin-top:4px;}
+  .off-tag{
+    display:inline-block; margin-top:10px; background:var(--gold); color:var(--navy-deep);
+    font-weight:700; font-size:0.78rem; padding:5px 14px; border-radius:999px;
+  }
+  .price-box .btn-primary{width:100%; margin-top:22px; text-align:center;}
+  .price-fine{margin-top:14px; font-size:0.74rem; color:rgba(251,247,238,0.55);}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--navy-deep); color:rgba(251,247,238,0.55); padding:34px 0; text-align:center; font-size:0.82rem;}
+  footer strong{color:var(--cream);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 880px){
+    .hero-grid{grid-template-columns:1fr; gap:40px;}
+    .book-stage{order:-1; min-height:340px;}
+    .pillars{grid-template-columns:repeat(3,1fr);}
+    .strip{grid-template-columns:repeat(2,1fr); gap:14px; border-radius:14px;}
+    .strip-item{border-left:none; border-top:1px solid rgba(251,247,238,0.14); padding-top:14px;}
+    .strip-item:nth-child(1),.strip-item:nth-child(2){border-top:none; padding-top:6px;}
+    .learn-grid{grid-template-columns:1fr;}
+    .cards{height:360px; margin:0 auto; max-width:340px;}
+    .trust-grid{grid-template-columns:repeat(2,1fr);}
+    .testi-top{grid-template-columns:1fr;}
+    .testi-grid{grid-template-columns:1fr;}
+    .price-card{grid-template-columns:1fr; padding:36px 26px;}
+  }
+  @media (max-width: 560px){
+    .pillars{grid-template-columns:repeat(2,1fr);}
+    .book{width:200px;}
+    .stack{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand">Your First <span>Salary</span></div>
+    <a href="#pricing" class="nav-cta">Get the guide</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div class="book-stage">
+      <div class="stack">
+        <div style="background:#2e5c8a;">BUDGETING</div>
+        <div style="background:#1f6e4b;">INVESTING</div>
+        <div style="background:#8a5a2e;">FINANCIAL PLANNING</div>
+        <div style="background:#7a3b3b;">WEALTH BUILDING</div>
+        <div style="background:#4a3b7a;">LIFE GOALS</div>
+      </div>
+      <div class="book">
+        <div class="book-face">
+          <div class="book-badge">REAL<br>EXAMPLES<br>&amp; STEPS</div>
+          <div class="book-eyebrow">A Practical Guide for Young Professionals</div>
+          <div class="book-title1">Your First</div>
+          <div class="book-title2">Salary</div>
+          <p class="book-desc">A simple guide to budgeting, saving, investing and building wealth for a better future.</p>
+          <div class="book-list">
+            <div class="book-list-item"><span class="dot" style="background:#e5f2ea;"><svg viewBox="0 0 10 10" fill="none"><path d="M2 6l2 2 4-5" stroke="#1f6e4b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Budget</div>
+            <div class="book-list-item"><span class="dot" style="background:#e5f2ea;"><svg viewBox="0 0 10 10" fill="none"><path d="M2 6l2 2 4-5" stroke="#1f6e4b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Invest</div>
+            <div class="book-list-item"><span class="dot" style="background:#e5f2ea;"><svg viewBox="0 0 10 10" fill="none"><path d="M2 6l2 2 4-5" stroke="#1f6e4b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Protect</div>
+            <div class="book-list-item"><span class="dot" style="background:#e5f2ea;"><svg viewBox="0 0 10 10" fill="none"><path d="M2 6l2 2 4-5" stroke="#1f6e4b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Learn</div>
+            <div class="book-list-item"><span class="dot" style="background:#e5f2ea;"><svg viewBox="0 0 10 10" fill="none"><path d="M2 6l2 2 4-5" stroke="#1f6e4b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Plan</div>
+          </div>
+          <div class="book-author">VARUN SAINI</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <span class="kicker">A practical guide to</span>
+      <h1>Make your first<br>paycheck<br><em>work for you</em></h1>
+      <p class="hero-sub">Most people learn money the hard way — through mistakes. This guide gives you the budgeting, saving and investing basics nobody taught you in school, in plain language, with real numbers.</p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn-primary">Get your copy — $9</a>
+        <span class="price-note">Instant download · <strong>50% off</strong> this week</span>
+      </div>
+
+      <div class="pillars">
+        <div class="pillar">
+          <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 20V10M12 20V4M19 20v-7" stroke-linecap="round"/></svg></div>
+          <h4>Budget</h4><p>Manage money with confidence</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 22V12M12 12C7 12 4 9 4 4c5 0 8 3 8 8Zm0 0c0-5 3-8 8-8 0 5-3 8-8 8Z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h4>Invest</h4><p>Grow wealth step by step</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3Z" stroke-linejoin="round"/></svg></div>
+          <h4>Protect</h4><p>Be ready for uncertainty</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15Z" stroke-linejoin="round"/></svg></div>
+          <h4>Learn</h4><p>Build skills, raise income</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.6" fill="currentColor"/></svg></div>
+          <h4>Plan</h4><p>Create the life you want</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="strip">
+    <div class="strip-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 2h9l5 5v15H6V2Z" stroke-linejoin="round"/><path d="M15 2v5h5" stroke-linejoin="round"/></svg><span>45-page e-book (PDF)</span></div>
+    <div class="strip-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 11l2 2 5-5M20 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Practical worksheets</span></div>
+    <div class="strip-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2a5 5 0 0 0-5 5v1a5 5 0 0 0 10 0V7a5 5 0 0 0-5-5Z"/><path d="M8 21h8M12 17v4M6 10a6 6 0 0 0 12 0" stroke-linecap="round"/></svg><span>Real examples &amp; action steps</span></div>
+    <div class="strip-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z"/></svg><span>Global perspective</span></div>
+  </div>
+</div>
+
+<section class="learn">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-label">Inside the guide</span>
+      <h2>What you'll actually learn</h2>
+      <div class="rule"></div>
+    </div>
+
+    <div class="learn-grid">
+      <div class="learn-list">
+        <div class="learn-item"><div class="check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="#1f6e4b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>How to handle your first salary smartly, from day one</p></div>
+        <div class="learn-item"><div class="check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="#1f6e4b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>Building a realistic budget that survives real life</p></div>
+        <div class="learn-item"><div class="check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="#1f6e4b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>Creating an emergency fund before you need one</p></div>
+        <div class="learn-item"><div class="check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="#1f6e4b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>Understanding investing, explained without jargon</p></div>
+        <div class="learn-item"><div class="check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="#1f6e4b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>Choosing insurance that actually covers you</p></div>
+        <div class="learn-item"><div class="check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="#1f6e4b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>Avoiding the money mistakes almost everyone makes</p></div>
+        <div class="learn-item"><div class="check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="#1f6e4b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>Planning for long-term financial freedom, one step at a time</p></div>
+      </div>
+
+      <div class="cards">
+        <div class="card card1">
+          <div class="card-title">Financial Freedom</div>
+          <div class="pyramid">
+            <div style="background:#e8a73d; color:#0f2b46;">Financial Freedom</div>
+            <div style="background:#2e5c8a;">Investments</div>
+            <div style="background:#1f6e4b;">Emergency Fund</div>
+            <div style="background:#3a7a54;">Savings</div>
+            <div style="background:#0f2b46;">Income</div>
+          </div>
+        </div>
+        <div class="card card2">
+          <div class="card-title">Simple Budget Framework</div>
+          <div class="donut-wrap">
+            <div class="donut"></div>
+            <div class="donut-legend">
+              <span><i class="swatch" style="background:#1f6e4b;"></i>50% Needs</span>
+              <span><i class="swatch" style="background:#e8a73d;"></i>30% Wants</span>
+              <span><i class="swatch" style="background:#0f2b46;"></i>20% Savings</span>
+            </div>
+          </div>
+        </div>
+        <div class="card card3">
+          <div class="card-title">30-60-90 Day Plan</div>
+          <div class="plan-steps">
+            <div class="plan-step"><span class="plan-dot" style="background:#2e5c8a;"><svg viewBox="0 0 8 8" fill="none"><path d="M1 4l2 2 4-4" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><strong>Days 1–30</strong>Set your foundation</span></div>
+            <div class="plan-step"><span class="plan-dot" style="background:#1f6e4b;"><svg viewBox="0 0 8 8" fill="none"><path d="M1 4l2 2 4-4" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><strong>Days 31–60</strong>Build momentum</span></div>
+            <div class="plan-step"><span class="plan-dot" style="background:#e8a73d;"><svg viewBox="0 0 8 8" fill="none"><path d="M1 4l2 2 4-4" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><strong>Days 61–90</strong>Start investing</span></div>
+          </div>
+        </div>
+        <p class="caption">Clear explanations, charts and worksheets you'll actually use.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="wrap trust-grid">
+    <div class="trust-item">
+      <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15Z" stroke-linejoin="round"/></svg></div>
+      <div><h4>Beginner friendly</h4><p>No confusing jargon, ever</p></div>
+    </div>
+    <div class="trust-item">
+      <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3" stroke-linecap="round"/></svg></div>
+      <div><h4>Real-world examples</h4><p>Numbers you can actually use</p></div>
+    </div>
+    <div class="trust-item">
+      <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 12l2 2 5-5" stroke-linecap="round" stroke-linejoin="round"/><rect x="4" y="4" width="16" height="16" rx="2"/></svg></div>
+      <div><h4>Actionable worksheets</h4><p>Start implementing today</p></div>
+    </div>
+    <div class="trust-item">
+      <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z"/></svg></div>
+      <div><h4>Global perspective</h4><p>Not written for one country only</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="testi">
+  <div class="wrap">
+    <div class="testi-top">
+      <h2>Trusted by first-time earners</h2>
+      <p>A simple, practical and honest guide to money — made for people opening their first payslip and wondering what to do next.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="quote-mark">&ldquo;</div>
+        <p class="quote">Super easy to read and genuinely practical. Perfect for anyone starting their career.</p>
+        <div class="stars">★★★★★</div>
+        <div class="testi-name">A young professional</div>
+      </div>
+      <div class="testi-card">
+        <div class="quote-mark">&ldquo;</div>
+        <p class="quote">Explains investing and budgeting in such a simple way. I actually used the worksheets.</p>
+        <div class="stars">★★★★★</div>
+        <div class="testi-name">Recent graduate</div>
+      </div>
+      <div class="testi-card">
+        <div class="quote-mark">&ldquo;</div>
+        <p class="quote">Finally a finance book that doesn't feel boring. Clear, practical and genuinely helpful.</p>
+        <div class="stars">★★★★★</div>
+        <div class="testi-name">First-time investor</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <div class="price-card">
+      <div>
+        <span class="price-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3" stroke-linecap="round"/></svg>
+          Limited-time offer
+        </span>
+        <h2>Start building better money habits today</h2>
+        <p>Get the full guide, every worksheet, and the 30-60-90 day action plan — download it now and start reading in minutes.</p>
+        <div class="guarantee-row">
+          <div><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3Z" stroke-linejoin="round"/></svg>30-day money-back guarantee</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke-linecap="round"/></svg>Secure payment</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 2h9l5 5v15H6V2Z" stroke-linejoin="round"/><path d="M15 2v5h5" stroke-linejoin="round"/></svg>Instant PDF download</div>
+        </div>
+      </div>
+
+      <div class="price-box">
+        <div class="old-price">$19</div>
+        <div class="new-price">$9</div>
+        <span class="off-tag">50% OFF</span>
+        <a href="#" class="btn-primary" style="display:block;">Get your copy now</a>
+        <p class="price-fine">Instant download · Secure payment · Lifetime access</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Your First Salary</strong> — A Practical Guide for Young Professionals, by Varun Saini</p>
+    <p style="margin-top:6px;">Small steps. Big future.</p>
+  </div>
+</footer>
+
+</body>
+</html>
